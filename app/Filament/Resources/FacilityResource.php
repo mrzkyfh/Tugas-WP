@@ -23,14 +23,14 @@ class FacilityResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\FileUpload::make('logo')
+                Forms\Components\FileUpload::make('image')
                     ->image()
-                    ->directory('airlines')
+                    ->directory('facilities')
                     ->required()
                     ->columnSpan(2),
-                Forms\Components\TextInput::make('code')
-                    ->required(),
                 Forms\Components\TextInput::make('name')
+                    ->required(),
+                Forms\Components\TextInput::make('description')
                     ->required(),
             ]);
     }
@@ -39,9 +39,9 @@ class FacilityResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('logo'),
-                Tables\Columns\TextColumn::make('code'),
+                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('description'),
             ])
             ->filters([
                 //

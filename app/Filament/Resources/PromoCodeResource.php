@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PromoCodeResource\Pages;
 use App\Filament\Resources\PromoCodeResource\RelationManagers;
 use App\Models\PromoCode;
+use Doctrine\DBAL\Driver\Mysqli\Initializer\Options;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -23,7 +24,24 @@ class PromoCodeResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('code')
+                    ->required(),
+                Forms\Components\Select::make('discount_type')
+                    ->required()
+                    ->options([
+                        'fixed' => 'Fixed',
+                        'percentage' => 'Percentage'
+                    ]),
+                Forms\Components\TextInput::make('discount')
+                    ->required()
+                    ->numeric()
+                    ->minValue(0),
+
+                Forms\Components\DateTimePicker::make('valid_until')
+                    ->required(),
+
+                Forms\Components\Toggle::make('is_used')
+                    ->required(),
             ]);
     }
 
