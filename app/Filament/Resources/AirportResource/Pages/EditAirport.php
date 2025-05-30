@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Kiki\Resources\AirportResource\Pages;
+namespace App\Filament\Resources\AirportResource\Pages;
 
-use App\Filament\Kiki\Resources\AirportResource;
+use App\Filament\Resources\AirportResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
