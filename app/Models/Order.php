@@ -29,7 +29,7 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function addres() {
+    public function address() {
         return $this->hasOne(Address::class);
     }
 }
