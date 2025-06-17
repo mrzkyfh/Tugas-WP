@@ -34,9 +34,6 @@ Route::get('/cart', CartPage::class);
 Route::get('/products/{slug}', ProductDetailPage::class);
 
 
-
-
-
 Route::middleware('guest')->group(function(){
     Route::get('/login', LoginPage::class);
     Route::get('/register', RegisterPage::class);
