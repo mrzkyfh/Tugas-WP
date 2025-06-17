@@ -57,8 +57,8 @@
             <div>
               <input type="range" class="w-full h-1 mb-4 bg-blue-100 rounded appearance-none cursor-pointer" max="500000" value="100000" step="100000">
               <div class="flex justify-between ">
-                <span class="inline-block text-lg font-bold text-blue-400 ">&#8377; 1000</span>
-                <span class="inline-block text-lg font-bold text-blue-400 ">&#8377; 500000</span>
+                <span class="inline-block text-lg font-bold text-blue-400 ">IDR ; 1000</span>
+                <span class="inline-block text-lg font-bold text-blue-400 ">IDR ; 500000</span>
               </div>
             </div>
           </div>
@@ -82,7 +82,11 @@
               <div class="border border-gray-300 dark:border-gray-700">
                 <div class="relative bg-gray-200">
                   <a href="/products/{{$product->slug}}" class="">
-                    <img src="{{url('storage', $product->image[0])}}" alt="{{ $product->name }}" class="object-cover w-full h-56 mx-auto ">
+                    @if (!empty($product['images']) && isset($product['images'][0]))
+                <img src="{{ asset('storage/' . $product['images'][0]) }}" alt="Product Image">
+                @else
+                <p>No image</p>
+                @endif
                   </a>
                 </div>
                 <div class="p-3 ">
@@ -112,7 +116,7 @@
           </div>
           <!-- pagination start -->
           <div class="flex justify-end mt-6">
-           {{ $product->links() }}
+           {{ $products->links() }}
           </div>
           <!-- pagination end -->
         </div>
