@@ -4,9 +4,8 @@ namespace App\Filament\Widgets;
 
 use App\Filament\Resources\OrderResource;
 use App\Models\Order;
-use Filament\Actions\Action;
 use Filament\Tables;
-use Filament\Tables\Actions\TableAction;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -18,7 +17,8 @@ use Filament\Resources\RelationManagers\RelationManager;
 class LatestOrders extends BaseWidget
 {
 
-    
+    protected int | string | array $columnSpan = 'full';
+    protected static ?int $sort = 2;
     public function table(Table $table): Table
     {
         return $table
@@ -67,7 +67,7 @@ class LatestOrders extends BaseWidget
             ->actions([
                 Action::make('View Order')
                 ->url(fn(Order $record): string => OrderResource::getUrl('view' , ['record' => $record]))
-                ->icon('heroicon-m-eye')
+                ->icon('heroicon-m-eye'),
             ]);
     }
 }
