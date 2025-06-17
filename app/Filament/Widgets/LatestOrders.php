@@ -1,35 +1,30 @@
 <?php
 
-namespace App\Filament\Resources\UserResource\RelationManagers;
+namespace App\Filament\Widgets;
 
 use App\Filament\Resources\OrderResource;
 use App\Models\Order;
 use Filament\Actions\Action;
+use Filament\Tables;
+use Filament\Tables\Actions\TableAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Filament\Widgets\TableWidget as BaseWidget;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class OrdersRelationManager extends RelationManager
+
+class LatestOrders extends BaseWidget
 {
-    protected static string $relationship = 'orders';
 
-    public function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                //
-            ]);
-    }
-
+    
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('id')
+            ->query(OrderResource::getEloquentQuery())
+            ->defaultPaginationPageOption(5)
+            ->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('id')
                 ->label('Order ID')
@@ -69,23 +64,10 @@ class OrdersRelationManager extends RelationManager
                 ->label('Order Date')
                 ->dateTime()
             ])
-            ->filters([
-                //
-            ])
-            ->headerActions([
-              //  Tables\Actions\CreateAction::make(),
-            ])
             ->actions([
                 Action::make('View Order')
                 ->url(fn(Order $record): string => OrderResource::getUrl('view' , ['record' => $record]))
-                ->color('info')
-                ->icon('heroicon-o-eye'),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                ->icon('heroicon-m-eye')
             ]);
     }
 }
