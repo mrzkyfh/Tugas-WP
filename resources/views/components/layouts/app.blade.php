@@ -16,5 +16,7 @@
         </main>
     @livewire('partials.footer')
     @livewireScripts
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     </body>
 </html>

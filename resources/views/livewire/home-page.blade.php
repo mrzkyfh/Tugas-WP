@@ -6,7 +6,7 @@
     <!-- Grid -->
     <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
       <div>
-        <h1 class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white">Nyari Hp ? <span class="text-blue-600">PaLuGaDa </span> Solusinya</h1>
+        <h1 class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white">Nyari Hp ? <span class="text-blue-600">PaLuDaGa </span> Solusinya</h1>
         <p class="mt-3 text-lg text-gray-800 dark:text-gray-400">Setiap Pembelian dilengkapi dengan... kek biasa aja beli hp dpt apa aja bingung mau ngisi apa.</p>
 
         <!-- Buttons -->
@@ -171,9 +171,8 @@
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-4 md:grid-cols-2">
 
     @foreach($brands as $brand)
-
       <div class="bg-white rounded-lg shadow-md dark:bg-gray-800" wire:key="{{ $brand->id}}">
-        <a href="" class="">
+        <a href="/products?selected_brands[0]={{ $brand->id }}" class="">
           <img src="{{url('storage', $brand->image)}}" alt="{{ $brand->name }}" class="object-cover w-full h-64 rounded-t-lg">
         </a>
         <div class="p-5 text-center">
@@ -219,7 +218,7 @@
 
      @foreach($categories as $category)
 
-      <a class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#" wire:key="{{ $category->id }}">
+      <a class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/products?selected_brands[0]={{ $category->id }}" wire:key="{{ $category->id }}">
         <div class="p-4 md:p-5">
           <div class="flex justify-between items-center">
             <div class="flex items-center">
