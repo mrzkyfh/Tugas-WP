@@ -19,7 +19,7 @@ class RegisterPage extends Component
 //Register User
     public function save() {
         $this->validate([
-            'name' => 'required',
+            'name' => 'required|max:255',
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|min:6|max:255',
         ]);
