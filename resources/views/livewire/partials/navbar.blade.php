@@ -58,7 +58,11 @@
               <div class="hs-dropdown-menu hidden absolute right-0 z-50 mt-2 min-w-[10rem] bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">My Orders</a>
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">My Account</a>
-                <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-700">Logout</a>
+                <a href="{{ url('/logout') }}" 
+                   class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-700">
+                  Logout
+                </a>
+
               </div>
             </div>
 
