@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'role' => '1',
             'status' => 1,
             'hp' => '0812345678901',
-            'password' => bcrypt('P@55word'),
+            'password' => bcrypt('passwordlima'),
         ]);
         User::create([
             'nama' => 'Sopian Aji',
@@ -33,19 +33,31 @@ class DatabaseSeeder extends Seeder
 
         #data kategori
         Kategori::create([
-            'nama_kategori' => 'Brownies',
+            'nama_kategori' => 'Smartphone',
         ]);
         Kategori::create([
-            'nama_kategori' => 'Combro',
+            'nama_kategori' => 'Laptop & Komputer',
         ]);
         Kategori::create([
-            'nama_kategori' => 'Dawet',
+            'nama_kategori' => 'Wearable',
         ]);
         Kategori::create([
-            'nama_kategori' => 'Mochi',
+            'nama_kategori' => 'Aksesoris Audio',
         ]);
         Kategori::create([
-            'nama_kategori' => 'Wingko',
+            'nama_kategori' => 'Aksesoris Handphone',
+        ]);
+        Kategori::create([
+            'nama_kategori' => 'Aksesoris Komputer',
+        ]);
+        Kategori::create([
+            'nama_kategori' => 'Service & Perbaikan',
+        ]);
+        Kategori::create([
+            'nama_kategori' => 'Smart Home',
+        ]);
+        Kategori::create([
+            'nama_kategori' => 'Gaming',
         ]);
     }
 }

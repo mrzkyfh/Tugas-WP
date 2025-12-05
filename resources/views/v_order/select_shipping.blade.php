@@ -127,148 +127,143 @@
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const originCityCode = 115; //ganti disini untuk kode kota asal 
-        const originCityName = 'Depok'; //ganti disini untuk nama kota asal 
+    document.addEventListener('DOMContentLoaded', function () {
+        // ================== KOTA ASAL (TETAP) ==================
+        const originCityCode = 115; // Depok (contoh)
+        const originCityName = 'Depok';
 
         document.getElementById('city_origin').value = originCityCode;
         document.getElementById('city_origin_name').value = originCityName;
 
-        // Load provinces
-        fetch('/provinces')
-            .then(response => response.json())
-            .then(data => {
-                if (data.rajaongkir.status.code === 200) {
-                    let provinces = data.rajaongkir.results;
-                    let provinceSelect = document.getElementById('province');
-                    provinces.forEach(province => {
-                        let option = document.createElement('option');
-                        option.value = province.province_id;
-                        option.textContent = province.province;
-                        provinceSelect.appendChild(option);
-                    });
-                } else {
-                    console.error('Failed to fetch provinces', data.rajaongkir.status.description);
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching provinces:', error);
+        // ================== DATA ONGKIR MANUAL JABODETABEK ==================
+        const shippingData = {
+            "DKI Jakarta": [
+                { city: "Jakarta Pusat", price: 10000 },
+                { city: "Jakarta Utara", price: 10000 },
+                { city: "Jakarta Selatan", price: 10000 },
+                { city: "Jakarta Timur", price: 10000 },
+                { city: "Jakarta Barat", price: 10000 },
+                { city: "Kepulauan Seribu", price: 12000 },
+            ],
+            "Jawa Barat": [
+                { city: "Kota Depok", price: 12000 },
+                { city: "Kota Bogor", price: 15000 },
+                { city: "Kabupaten Bogor", price: 16000 },
+                { city: "Kota Bekasi", price: 13000 },
+                { city: "Kabupaten Bekasi", price: 14000 },
+            ],
+            "Banten": [
+                { city: "Kota Tangerang", price: 13000 },
+                { city: "Kota Tangerang Selatan", price: 13000 },
+                { city: "Kabupaten Tangerang", price: 14000 },
+            ],
+        };
+
+        // ================== ELEMENT FORM ==================
+        const provinceSelect = document.getElementById('province');
+        const citySelect = document.getElementById('city');
+        const shippingForm = document.getElementById('shippingForm');
+        const shippingResults = document.getElementById('shippingResults');
+
+        const provinceNameInput = document.getElementById('province_name');
+        const cityNameInput = document.getElementById('city_name');
+        const weightInput = document.getElementById('weight');
+        const alamatInput = document.getElementById('alamat');
+        const kodePosInput = document.getElementById('kode_pos');
+
+        // ================== ISI PROVINSI MANUAL ==================
+        provinceSelect.innerHTML = '<option value="">Pilih Provinsi Tujuan</option>';
+        Object.keys(shippingData).forEach(function (provName) {
+            const option = document.createElement('option');
+            option.value = provName;
+            option.textContent = provName;
+            provinceSelect.appendChild(option);
+        });
+
+        // ================== SAAT PROVINSI DIGANTI ==================
+        provinceSelect.addEventListener('change', function () {
+            const selectedProvince = this.value;
+            provinceNameInput.value = selectedProvince;
+
+            // reset kota
+            citySelect.innerHTML = '<option value="">Pilih Kota Tujuan</option>';
+
+            if (!selectedProvince || !shippingData[selectedProvince]) return;
+
+            shippingData[selectedProvince].forEach(function (item) {
+                const option = document.createElement('option');
+                option.value = item.city;
+                option.textContent = item.city;
+                option.setAttribute('data-price', item.price);
+                citySelect.appendChild(option);
             });
-
-        // Load cities based on selected province
-        document.getElementById('province').addEventListener('change', function() {
-            let provinceId = this.value;
-            let provinceName = this.options[this.selectedIndex].text;
-            document.getElementById('province_name').value = provinceName;
-
-            fetch(`/cities?province_id=${provinceId}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.rajaongkir.status.code === 200) {
-                        let cities = data.rajaongkir.results;
-                        let citySelect = document.getElementById('city');
-                        citySelect.innerHTML = '<option value="">Pilih Kota Tujuan</option>'; // Clear previous options
-                        cities.forEach(city => {
-                            let option = document.createElement('option');
-                            option.value = city.city_id;
-                            option.textContent = city.city_name;
-                            citySelect.appendChild(option);
-                        });
-                    } else {
-                        console.error('Failed to fetch cities', data.rajaongkir.status.description);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching cities:', error);
-                });
         });
 
-        document.getElementById('city').addEventListener('change', function() {
-            let cityName = this.options[this.selectedIndex].text;
-            document.getElementById('city_name').value = cityName;
+        // ================== SAAT KOTA DIGANTI ==================
+        citySelect.addEventListener('change', function () {
+            const cityName = this.value;
+            cityNameInput.value = cityName;
         });
 
-        // Handle form submission for shipping cost check
-        document.getElementById('shippingForm').addEventListener('submit', function(event) {
+        // ================== SAAT FORM "CEK ONGKIR" DI-SUBMIT ==================
+        shippingForm.addEventListener('submit', function (event) {
             event.preventDefault();
-            let origin = document.getElementById('city_origin').value;
-            let originName = document.getElementById('city_origin_name').value;
-            let destination = document.getElementById('city').value;
-            let weight = document.getElementById('weight').value;
-            let courier = document.getElementById('courier').value;
-            let alamat = document.getElementById('alamat').value;
-            let kodePos = document.getElementById('kode_pos').value;
 
-            // Validasi alamat dan kode pos
-            if (!alamat.trim() || !kodePos.trim()) {
-                alert('Harap lengkapi alamat dan kode pos sebelum mengecek ongkir.');
+            const provinceName = provinceSelect.value;
+            const cityOption = citySelect.options[citySelect.selectedIndex];
+            const cityName = citySelect.value;
+            const price = cityOption ? cityOption.getAttribute('data-price') : null;
+            const weight = weightInput.value;
+            const alamat = alamatInput.value.trim();
+            const kodePos = kodePosInput.value.trim();
+            const courier = 'MANUAL';
+
+            // VALIDASI SEDERHANA
+            if (!provinceName || !cityName || !price || !weight || !alamat || !kodePos) {
+                alert('Harap lengkapi semua kolom sebelum melanjutkan.');
                 return;
             }
 
-            if (!origin || !originName || !destination || !weight || !courier) {
-                alert('Harap lengkapi semua kolom sebelum mengecek ongkir.');
-                return;
-            }
+            // Bersihkan hasil lama
+            shippingResults.innerHTML = '';
 
-            fetch('/cost', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({
-                        origin: origin,
-                        destination: destination,
-                        weight: weight,
-                        courier: courier
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.rajaongkir.status.code === 200) {
-                        let result = data.rajaongkir.results[0].costs;
-                        let shippingResults = document.getElementById('shippingResults');
-                        shippingResults.innerHTML = ''; // Clear previous results
-                        result.forEach(cost => {
-                            let row = document.createElement('tr');
-                            row.innerHTML = `
-                                <td>${cost.service}</td>
-                                <td>${cost.cost[0].value} Rupiah</td>
-                                <td>${cost.cost[0].etd} hari</td>
-                                <td>${weight} Gram</td>
-                                <td>Rp. {{ number_format($totalHarga, 0, ',', '.') }}</td>
-                                <td>
-                                    <form action="{{ route('order.update-ongkir') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="province" value="${document.getElementById('province').value}">
-                                        <input type="hidden" name="city" value="${document.getElementById('city').value}">
-                                        <input type="hidden" name="province_name" value="${document.getElementById('province_name').value}">
-                                        <input type="hidden" name="city_name" value="${document.getElementById('city_name').value}">
-                                        <input type="hidden" name="kurir" value="${courier}">
-                                        <input type="hidden" name="alamat" value="${alamat}">
-                                        <input type="hidden" name="pos" value="${kodePos}">
-                                        <input type="hidden" name="layanan_ongkir" value="${cost.service}">
-                                        <input type="hidden" name="biaya_ongkir" value="${cost.cost[0].value}">
-                                        <input type="hidden" name="estimasi_ongkir" value="${cost.cost[0].etd}">
-                                        <input type="hidden" name="total_berat" value="${weight}">
-                                        <input type="hidden" name="city_origin" value="${origin}">
-                                        <input type="hidden" name="city_origin_name" value="${originName}">
-                                        <button type="submit" class="primary-btn">Pilih Pengiriman</button>
-                                    </form>
-                                </td>
-                            `;
-                            shippingResults.appendChild(row);
-                        });
-                    } else {
-                        console.error('Failed to fetch cost', data.rajaongkir.status.description);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching cost:', error);
-                });
+            // Buat baris baru di tabel hasil
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${courier}</td>
+                <td>Manual Reguler</td>
+                <td>1-3 hari</td>
+                <td>${weight} Gram</td>
+                <td>Rp. {{ number_format($totalHarga, 0, ',', '.') }}</td>
+                <td>
+                    <form action="{{ route('order.update-ongkir') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="province" value="${provinceName}">
+                        <input type="hidden" name="province_name" value="${provinceName}">
+                        <input type="hidden" name="city" value="${cityName}">
+                        <input type="hidden" name="city_name" value="${cityName}">
+                        <input type="hidden" name="kurir" value="${courier}">
+                        <input type="hidden" name="alamat" value="${alamat}">
+                        <input type="hidden" name="pos" value="${kodePos}">
+                        <input type="hidden" name="layanan_ongkir" value="Manual Reguler">
+                        <input type="hidden" name="biaya_ongkir" value="${price}">
+                        <input type="hidden" name="estimasi_ongkir" value="1-3 hari">
+                        <button type="submit" class="primary-btn">Pilih Pengiriman</button>
+                    </form>
+                </td>
+            `;
+
+            shippingResults.appendChild(row);
+
+            // pastikan div hasil tampil (kalau sebelumnya disembunyikan via CSS)
+            const resultDiv = document.getElementById('result');
+            if (resultDiv) {
+                resultDiv.style.display = 'block';
+            }
         });
     });
 </script>
+
 
 <!-- end template-->
 @endsection

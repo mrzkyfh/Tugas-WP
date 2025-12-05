@@ -21,44 +21,46 @@ class CustomerController extends Controller
 
     // Callback dari Google
     public function callback()
-    {
-        try {
-            $socialUser = Socialite::driver('google')->user();
+{
+    try {
+        $socialUser = Socialite::driver('google')->user();
 
-            // Cek apakah email sudah terdaftar
-            $registeredUser = User::where('email', $socialUser->email)->first();
+        // cek user terdaftar atau belum
+        $registeredUser = User::where('email', $socialUser->email)->first();
 
-            if (!$registeredUser) {
-                // Buat user baru
-                $user = User::create([
-                    'nama' => $socialUser->name,
-                    'email' => $socialUser->email,
-                    'role' => '2', // Role customer
-                    'status' => 1, // Status aktif
-                    'password' => Hash::make('default_password'), // Password default (opsional)
-                ]);
+        if (!$registeredUser) {
+            // Buat user baru
+            $user = User::create([
+                'nama' => $socialUser->name,
+                'email' => $socialUser->email,
+                'role' => '2', 
+                'status' => 1,
+                'password' => Hash::make('default_password'),
+            ]);
 
-                // Buat data customer
-                Customer::create([
-                    'user_id' => $user->id,
-                    'google_id' => $socialUser->id,
-                    'google_token' => $socialUser->token
-                ]);
-
-                // Login pengguna baru
-                Auth::login($user);
-            } else {
-                // Jika email sudah terdaftar, langsung login
-                Auth::login($registeredUser);
-            }
-
-            // Redirect ke halaman utama
-            return redirect()->intended('beranda');
-        } catch (\Exception $e) {
-            // Redirect ke halaman utama jika terjadi kesalahan
-            return redirect('/')->with('error', 'Terjadi kesalahan saat login dengan Google.');
+        } else {
+            $user = $registeredUser;
         }
+
+        // Login user
+        Auth::login($user);
+
+        // 🔥 PENTING: buat customer jika belum ada
+        Customer::firstOrCreate(
+            ['user_id' => $user->id],
+            [
+                'google_id' => $socialUser->id,
+                'google_token' => $socialUser->token
+            ]
+        );
+
+        return redirect()->intended('beranda');
+
+    } catch (\Exception $e) {
+        return redirect('/')->with('error', 'Terjadi kesalahan saat login dengan Google.');
     }
+}
+
 
     public function logout(Request $request)
     {
