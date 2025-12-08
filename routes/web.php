@@ -51,6 +51,7 @@ Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
 Route::get('/produk/detail/{id}', [ProdukController::class, 'detail'])->name('produk.detail');
 Route::get('/produk/kategori/{id}', [ProdukController::class, 'produkKategori'])->name('produk.kategori');
 Route::get('/produk/all', [ProdukController::class, 'produkAll'])->name('produk.all');
+Route::get('/lokasi', [ProdukController::class, 'lokasi'])->name('lokasi');
 
 // API Google
 Route::get('/auth/redirect', [CustomerController::class, 'redirect'])->name('auth.redirect');

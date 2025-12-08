@@ -354,4 +354,11 @@ class ProdukController extends Controller
             'produk' => $produk,
         ]);
     }
+
+    public function lokasi()
+    {
+        // kalau mau kirim data (alamat, jam buka, dll) bisa dari sini
+        return view('v_layouts.app'); // sesuaikan folder view kamu
+    }
+
 }

@@ -177,7 +177,7 @@
                     <ul class="menu-list">
                         <li><a href="{{ route('beranda') }}">Beranda</a></li>
                         <li><a href="{{ route('produk.all') }}">Produk</a></li>
-                        <li><a href="#">Lokasi</a></li>
+                        <li><a href="{{ route('lokasi') }}">Lokasi</a></li>
                         <li><a href="#">Hubungi Kami</a></li>
                     </ul>
                 </div>
@@ -247,15 +247,15 @@
                 <div id="aside" class="col-md-3">
                     <!-- aside widget -->
                     <div class="aside">
-                        <h3 class="aside-title">Top Rated Product</h3>
+                        <h3 class="aside-title">PRODUK TERLARIS</h3>
                         <!-- widget product -->
                         <div class="product product-widget">
                             <div class="product-thumb">
                                 <img src="{{ asset('frontend/img/thumb-product01.jpg') }}" alt="">
                             </div>
                             <div class="product-body">
-                                <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-                                <h3 class="product-price">$32.50 <del class="product-old-price">$45.00</del></h3>
+                                <h2 class="product-name"><a href="{{ route('produk.all') }}">keyboard acus</a></h2>
+                                <h3 class="product-price">Rp.350.000 <del class="product-old-price">Rp.450.000</del></h3>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -270,17 +270,17 @@
                         <!-- widget product -->
                         <div class="product product-widget">
                             <div class="product-thumb">
-                                <img src="{{ asset('frontend/img/thumb-product01.jpg') }}" alt="">
+                                <img src="{{ asset('frontend/img/thumb-product02.jpg') }}" alt="">
                             </div>
                             <div class="product-body">
-                                <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-                                <h3 class="product-price">$32.50</h3>
+                                <h2 class="product-name"><a href="#">Mouse Razer</a></h2>
+                                <h3 class="product-price">Rp.200.000 <del class="product-old-price">Rp.350.000</del></h3>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o empty"></i>
+                                    <i class="fa fa-star"></i>
                                 </div>
                             </div>
                         </div>
@@ -343,11 +343,10 @@
 
                         <!-- footer social -->
                         <ul class="footer-social">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="https:facebook.com"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https:twitter.com"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https:instagram.com"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https:id.pinterest.com"><i class="fa fa-pinterest"></i></a></li>
                         </ul>
                         <!-- /footer social -->
                     </div>
@@ -362,8 +361,7 @@
                             <li><a href="#">Akun Saya</a></li>
                             <li><a href="#">Daftar Keinginan Saya</a></li>
                             <li><a href="#">Membandingkan</a></li>
-                            <li><a href="#">Check-out</a></li>
-                            <li><a href="#">Masuk</a></li>
+                            <li><a href="{{ route('order.cart')}}">Check-out</a></li>
                         </ul>
                     </div>
                 </div>
