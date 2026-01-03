@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/icon_univ_bsi.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/logo.png') }}">
     <title>tokoonline</title>
     <!-- Custom CSS -->
     <link href="{{ asset('backend/dist/css/style.min.css') }}" rel="stylesheet">
@@ -136,14 +136,14 @@
                         <b class="logo-icon p-l-10">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="{{ asset('image/icon_univ_bsi.png') }}" alt="homepage" class="light-logo" />
+                            <img src="{{ asset('image/icon_univ_bsi.png') }}" alt="" class="light-logo" />
 
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="{{ asset('image/logo_text.png') }}" alt="homepage" class="light-logo" />
+                            <img src="{{ asset('image/logo_text.png') }}" alt="" class="light-logo" />
 
                         </span>
                         <!-- Logo icon -->
@@ -311,7 +311,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                Web Programming. Studi Kasus Toko Online <a href="https://bsi.ac.id/">Kuliah..? BSI Aja !!!</a>
+                Halaman Toko Online <a >Mau beli..? DISINI Aja !!!</a>
             </footer>
 
             <!-- ============================================================== -->
