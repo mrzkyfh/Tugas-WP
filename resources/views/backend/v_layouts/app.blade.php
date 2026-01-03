@@ -12,15 +12,98 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/icon_univ_bsi.png') }}">
     <title>tokoonline</title>
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/extra-libs/multicheck/multicheck.css') }}">
-    <link href="{{ asset('backend/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/dist/css/style.min.css') }}" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+
+<style>
+    /* ================= SIDEBAR MODERN ================= */
+
+    /* background & border sidebar */
+    .left-sidebar {
+        background: radial-gradient(circle at top left, #111827, #020617);
+        border-right: 1px solid rgba(148, 163, 184, 0.28);
+        box-shadow: 8px 0 30px rgba(15, 23, 42, 0.55);
+    }
+
+    /* list utama */
+    .sidebar-nav ul {
+        padding-top: 10px;
+    }
+
+    .sidebar-nav .sidebar-item {
+        margin: 2px 10px;
+    }
+
+    .sidebar-nav .sidebar-link {
+        border-radius: 999px;
+        padding: 9px 14px;
+        font-size: 13px;
+        color: #9ca3af;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all .18s ease;
+    }
+
+    .sidebar-nav .sidebar-link i {
+        width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(15, 23, 42, 0.9);
+        font-size: 13px;
+    }
+
+    /* hover */
+    .sidebar-nav .sidebar-link:hover {
+        background: rgba(37, 99, 235, 0.18);
+        color: #e5e7eb;
+        text-decoration: none;
+    }
+
+    .sidebar-nav .sidebar-link:hover i {
+        background: #1d4ed8;
+        color: #e5e7eb;
+    }
+
+    /* active / menu terpilih */
+    .sidebar-nav .sidebar-item.selected > .sidebar-link,
+    .sidebar-nav .sidebar-link.active {
+        background: linear-gradient(90deg, #1d4ed8, #2563eb);
+        color: #f9fafb;
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.45);
+    }
+
+    .sidebar-nav .sidebar-item.selected > .sidebar-link i,
+    .sidebar-nav .sidebar-link.active i {
+        background: rgba(15, 23, 42, 0.15);
+    }
+
+    /* submenu (Kategori, Produk, Laporan) */
+    .sidebar-nav .first-level .sidebar-item .sidebar-link {
+        border-radius: 10px;
+        padding-left: 40px;
+        font-size: 12px;
+        color: #9ca3af;
+    }
+
+    .sidebar-nav .first-level .sidebar-item .sidebar-link:hover {
+        background: rgba(15, 23, 42, 0.9);
+        color: #e5e7eb;
+    }
+
+    /* icon panah dropdown */
+    .sidebar-nav .has-arrow:after {
+        right: 16px;
+        border-color: #6b7280;
+    }
+
+    .sidebar-nav .sidebar-item.selected > .sidebar-link.has-arrow:after {
+        border-color: #e5e7eb;
+    }
+</style>
+
 </head>
 
 <body>

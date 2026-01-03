@@ -44,151 +44,161 @@
 
 <body>
     <!-- HEADER -->
-    <header>
-        <!-- top Header -->
-        <div id="top-header">
-            <div class="container">
-                <div class="pull-left">
-                    <span>Selamat datang di toko komputer kami</span>
-                </div>
+<header class="site-header">
+    <!-- top Header -->
+    <div id="top-header" class="header-top">
+        <div class="container">
+            <div class="top-header-left">
+                <i class="fa fa-desktop"></i>
+                <span>Selamat datang di <strong>toko komputer</strong></span>
+            </div>
+            <div class="top-header-right">
+                <i class="fa fa-whatsapp"></i>
+                <span> 08xx-xxxx-xxxx</span>
+                <span class="top-header-divider"></span>
+                <i class="fa fa-truck"></i>
+                <span> Pengiriman cepat area Jabodetabek</span>
             </div>
         </div>
-        <!-- /top Header -->
+    </div>
+    <!-- /top Header -->
 
-        <!-- header -->
-        <div id="header">
-            <div class="container">
-                <div class="pull-left">
-                    <!-- Logo -->
-                    <div class="header-logo">
-                        <a class="logo" href="#">
-                            <img src="{{ asset('image/logo.png') }}" alt="">
-                        </a>
+    <!-- header main -->
+    <div id="header" class="header-main">
+        <div class="container header-main-inner">
+            <div class="header-left">
+                <!-- Logo + nama toko -->
+                <div class="header-logo">
+                    <a class="logo" href="{{ route('beranda') }}">
+                        <img src="{{ asset('image/logo.png') }}" alt="Logo toko komputer">
+                    </a>
+                    <div class="brand-text">
+                        <span class="brand-name">Toko Komputer</span>
+                        <span class="brand-tagline">Perangkat lengkap untuk kebutuhan digital Anda</span>
                     </div>
-                    <!-- /Logo -->
-
-                    <!-- Search -->
-
-                    <!-- /Search -->
                 </div>
-                <div class="pull-right">
-                    <ul class="header-btns">
-                        <!-- Cart -->
-                        <li class="header-cart dropdown default-dropdown">
-                            <a href="{{ route('order.cart') }}">
-                                <div class="header-btns-icon">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <!-- <span class="qty">3</span> -->
-                                </div>
-                                <strong class="text-uppercase">Keranjang</strong>
+                <!-- /Logo -->
+            </div>
 
-                            </a>
-                        </li>
-                        <!-- /Cart -->
+            <div class="header-right">
+                <ul class="header-btns">
+                    <!-- Cart -->
+                    <li class="header-cart dropdown modern-header-btn">
+                        <a href="{{ route('order.cart') }}" class="header-btn-link">
+                            <div class="header-btns-icon">
+                                <i class="fa fa-shopping-cart"></i>
+                            </div>
+                            <div class="header-btns-text">
+                                <span class="label">Keranjang</span>
+                                <span class="sub">Lihat pesanan Anda</span>
+                            </div>
+                        </a>
+                    </li>
+                    <!-- /Cart -->
 
-                        <!-- Account -->
-                        @if (Auth::check())
-                        <li class="header-account dropdown default-dropdown">
-                            <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+                    <!-- Account -->
+                    @if (Auth::check())
+                        <li class="header-account dropdown modern-header-btn">
+                            <a href="#" class="dropdown-toggle header-btn-link" data-toggle="dropdown"
+                               role="button" aria-expanded="true">
                                 <div class="header-btns-icon">
                                     <i class="fa fa-user-o"></i>
                                 </div>
-                                <strong class="text-uppercase">{{ Auth::user()->nama }}<i
-                                        class="fa fa-caret-down"></i></strong>
-                            </div>
+                                <div class="header-btns-text">
+                                    <span class="label">{{ Auth::user()->nama }}</span>
+                                    <span class="sub">Akun saya</span>
+                                </div>
+                                <i class="fa fa-caret-down caret-icon"></i>
+                            </a>
                             <ul class="custom-menu">
-                                <li><a href="{{ route('customer.akun', ['id' => Auth::user()->id]) }}"><i class="fa fa-user-o"></i> Akun Saya</a></li>
+                                {{-- TODO: sesuaikan route halaman profil/akun --}}
+                                <li><a href="#"><i class="fa fa-user-o"></i> Akun Saya</a></li>
                                 <li><a href="{{ route('order.history') }}"><i class="fa fa-check"></i> History</a></li>
                                 <li>
                                     <a href="#"
-                                        onclick="event.preventDefault(); document.getElementById('keluar-app').submit();"><i class="fa fa-power-off"></i> Keluar
+                                       onclick="event.preventDefault(); document.getElementById('keluar-app').submit();">
+                                        <i class="fa fa-power-off"></i> Keluar
                                     </a>
-                                    <!-- form keluar app -->
-                                    <form id="keluar-app" action="{{ route('logout' ) }}" method="POST" class="d-none">
+                                    <form id="keluar-app" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                                    <!-- form keluar app end -->
                                 </li>
                             </ul>
                         </li>
-                        @else
-                        <li class="header-account dropdown default-dropdown">
-                            <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+                    @else
+                        <li class="header-account modern-header-btn">
+                            <a href="{{ route('auth.redirect') }}" class="header-btn-link">
                                 <div class="header-btns-icon">
                                     <i class="fa fa-user-o"></i>
                                 </div>
-                                <strong class="text-uppercase">Akun Saya<i class="fa fa-caret-down"></i></strong>
-                            </div>
-                            <a href="{{ route('auth.redirect') }}" class="text-uppercase">Login</a>
+                                <div class="header-btns-text">
+                                    <span class="label">Akun Saya</span>
+                                    <span class="sub">Login / Daftar</span>
+                                </div>
+                            </a>
                         </li>
-                        @endif
-                        <!-- /Account -->
+                    @endif
+                    <!-- /Account -->
 
-
-                        <!-- Mobile nav toggle-->
-                        <li class="nav-toggle">
-                            <button class="nav-toggle-btn main-btn icon-btn"><i class="fa fa-bars"></i></button>
-                        </li>
-                        <!-- / Mobile nav toggle -->
-                    </ul>
-                </div>
+                    <!-- Mobile nav toggle-->
+                    <li class="nav-toggle">
+                        <button class="nav-toggle-btn main-btn icon-btn">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </li>
+                    <!-- / Mobile nav toggle -->
+                </ul>
             </div>
-            <!-- header -->
         </div>
-        <!-- container -->
-    </header>
-    <!-- /HEADER -->
+    </div>
+    <!-- /header main -->
+</header>
+<!-- /HEADER -->
 
-    <!-- NAVIGATION -->
-    <div id="navigation">
-        <!-- container -->
-        <div class="container">
-            <div id="responsive-nav">
-                @php
+<!-- NAVIGATION -->
+<div id="navigation" class="main-nav">
+    <div class="container">
+        <div id="responsive-nav">
+            @php
                 $kategori = DB::table('kategori')->orderBy('nama_kategori', 'asc')->get();
-                @endphp
-                @if (request()->segment(1) == '' || request()->segment(1) == 'beranda')
+            @endphp
+
+            @if (request()->segment(1) == '' || request()->segment(1) == 'beranda')
                 <!-- category nav -->
                 <div class="category-nav">
-                    <span class="category-header">Kategori <i class="fa fa-list"></i></span>
+                    <span class="category-header">
+                        <i class="fa fa-list"></i>
+                        Kategori
+                    </span>
                     <ul class="category-list">
                         @foreach ($kategori as $row)
-                        <li><a href="{{ route('produk.kategori', $row->id) }}">{{ $row->nama_kategori }}</a></li>
-                        @endforeach
-                    </ul>
-
-                    <ul class="category-list">
-                </div>
-                @else
-                <div class="category-nav show-on-click">
-                    <span class="category-header">Kategori <i class="fa fa-list"></i></span>
-                    <ul class="category-list">
-                        @foreach ($kategori as $row)
-                        <li><a href="{{ route('produk.kategori', $row->id) }}">{{ $row->nama_kategori }}</a></li>
+                            <li>
+                                <a href="{{ route('produk.kategori', $row->id) }}">
+                                    {{ $row->nama_kategori }}
+                                </a>
+                            </li>
                         @endforeach
                     </ul>
                 </div>
                 <!-- /category nav -->
-                @endif
+            @endif
 
-                <!-- menu nav -->
-                <div class="menu-nav">
-                    <span class="menu-header">Menu <i class="fa fa-bars"></i></span>
-                    <ul class="menu-list">
-                        <li><a href="{{ route('beranda') }}">Beranda</a></li>
-                        <li><a href="{{ route('produk.all') }}">Produk</a></li>
-                        <li><a href="{{ route('lokasi') }}">Lokasi</a></li>
-                        <li><a href="#">Hubungi Kami</a></li>
-                    </ul>
-                </div>
-                <!-- menu nav -->
-
-
+            <!-- menu nav -->
+            <div class="menu-nav">
+                <span class="menu-header">Menu <i class="fa fa-bars"></i></span>
+                <ul class="menu-list">
+                    <li><a href="{{ route('beranda') }}">Beranda</a></li>
+                    <li><a href="{{ route('produk.all') }}">Produk</a></li>
+                    <li><a href="{{ route('lokasi') }}">Lokasi</a></li>
+                    <li><a href="#">Hubungi Kami</a></li>
+                </ul>
             </div>
+            <!-- /menu nav -->
         </div>
-        <!-- /container -->
     </div>
-    <!-- /NAVIGATION -->
+</div>
+<!-- /NAVIGATION -->
+
 
     @if (request()->segment(1) == '' || request()->segment(1) == 'beranda')
     <div id="home">

@@ -97,7 +97,7 @@ a:hover, a:focus {
 }
 
 strong {
-  color: #30323A;
+  color: #3d59c7;
 }
 
 ul, ol {
@@ -1728,3 +1728,373 @@ textarea.input {
     width: 100%;
   }
 }
+
+/* ====== HEADER BARU ====== */
+.site-header {
+    font-family: "Hind", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Top bar */
+.header-top {
+    background: linear-gradient(90deg, #0f172a, #1d4ed8);
+    color: #f9fafb;
+    font-size: 13px;
+    padding: 6px 0;
+}
+
+.header-top .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-header-left,
+.top-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.top-header-left i,
+.top-header-right i {
+    font-size: 13px;
+}
+
+.top-header-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(148, 163, 184, 0.7);
+    margin: 0 8px;
+}
+
+/* Header utama */
+.header-main {
+    background: #ffffff;
+    padding: 16px 0;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.header-main-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.header-logo .logo img {
+    height: 44px;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #25417d;
+}
+
+.brand-tagline {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* Tombol di kanan (keranjang, akun) */
+.header-right .header-btns {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.modern-header-btn .header-btn-link {
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #f3f4ff;
+    border: 1px solid transparent;
+    transition: all .2s ease;
+    color: inherit;
+}
+
+.modern-header-btn .header-btn-link:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    color: #f9fafb;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+    text-decoration: none;
+}
+
+.header-btns-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    background: #e0e7ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.modern-header-btn .header-btn-link:hover .header-btns-icon {
+    background: rgba(15, 23, 42, 0.15);
+}
+
+.header-btns-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.1;
+}
+
+.header-btns-text .label {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.header-btns-text .sub {
+    font-size: 11px;
+    color: #335287;
+}
+
+.caret-icon {
+    margin-left: 6px;
+    font-size: 11px;
+}
+
+/* NAVIGASI BAWAH */
+#navigation.main-nav {
+    background: #111827;
+    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.55);
+}
+
+#navigation .container {
+    display: flex;
+}
+
+#responsive-nav {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+
+/* Kategori (kiri) */
+.category-nav {
+    background: #1d4ed8;
+    color: #f9fafb;
+    min-width: 210px;
+    position: relative;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+.category-header i {
+    font-size: 14px;
+}
+
+.category-list {
+    background: #ffffff;
+    color: #111827;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .25s ease;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.25);
+}
+
+.category-nav:hover .category-list {
+    max-height: 360px;
+}
+
+.category-list li a {
+    display: block;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.category-list li a:hover {
+    background: #eff6ff;
+}
+
+/* Menu utama (kanan) */
+.menu-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-left: 32px;
+}
+
+.menu-header {
+    display: none; /* Desktop: disembunyikan. Mobile bisa diaktifkan lagi */
+}
+
+.menu-list {
+    display: flex;
+    gap: 24px;
+}
+
+.menu-list li a {
+    display: inline-block;
+    padding: 14px 0;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #e5e7eb;
+    position: relative;
+}
+
+.menu-list li a:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 6px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #38bdf8, #a855f7);
+    transition: width .25s ease;
+}
+
+.menu-list li a:hover {
+    color: #ffffff;
+}
+
+.menu-list li a:hover:after {
+    width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .header-main-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .header-right .header-btns {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    #navigation .container,
+    #responsive-nav {
+        display: block;
+    }
+
+    .menu-nav {
+        padding: 10px 0 12px;
+    }
+
+    .menu-header {
+        display: block;
+        color: #9ca3af;
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+
+    .menu-list {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+}
+
+/* ===== PRODUCT DETAIL MODERN ===== */
+
+.product-detail-card{
+    display:grid;
+    grid-template-columns:1.1fr 1.2fr;
+    gap:32px;
+    padding:26px;
+    border-radius:18px;
+    background:#ffffff;
+    box-shadow:0 25px 45px rgba(15,23,42,.08);
+    margin-top:10px;
+}
+
+/* Gallery */
+.detail-gallery{}
+.detail-image-main{
+    border-radius:14px;
+    overflow:hidden;
+    background:#f3f4ff;
+    padding:14px;
+}
+.detail-image-main img{
+    width:100%;display:block;object-fit:contain;
+}
+.detail-thumb-list{
+    display:flex;gap:10px;margin-top:10px;
+}
+.detail-thumb-list img{
+    width:70px;height:70px;border-radius:10px;
+    object-fit:cover;cursor:pointer;
+    border:2px solid transparent;
+}
+.detail-thumb-list .thumb-active,
+.detail-thumb-list img:hover{
+    border-color:#2563eb;
+}
+
+/* Info */
+.detail-info{display:flex;flex-direction:column}
+.detail-meta{display:flex;gap:8px;margin-bottom:6px}
+.badge-cat{
+    background:#111827;color:#fff;
+    padding:5px 10px;border-radius:999px;
+    font-size:11px;text-transform:uppercase;
+}
+.badge-stock{
+    background:#e0f2fe;color:#0369a1;
+    padding:5px 10px;border-radius:999px;
+    font-size:11px;
+}
+
+.detail-title{
+    font-size:22px;font-weight:700;
+    margin-bottom:4px;color:#111827;
+}
+.detail-price{
+    font-size:22px;font-weight:700;
+    color:#1d4ed8;margin:10px 0;
+}
+.detail-desc{font-size:13px;color:#4b5563;line-height:1.6}
+
+.detail-attr{margin:10px 0 16px;padding:0;list-style:none}
+.detail-attr li{font-size:13px;color:#374151}
+
+/* Button */
+.btn-primary-pill{
+    border-radius:999px;
+    background:linear-gradient(90deg,#1d4ed8,#2563eb);
+    padding:10px 18px;color:#fff;border:none;
+    font-size:13px;font-weight:600;
+    box-shadow:0 14px 30px rgba(37,99,235,.35);
+}
+.btn-primary-pill:hover{filter:brightness(1.08);cursor:pointer}
+
+/* Responsive */
+@media(max-width:991px){
+    .product-detail-card{grid-template-columns:1fr;padding:18px}
+}
+
