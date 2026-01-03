@@ -319,7 +319,7 @@ textarea.input {
 #top-header {
   padding-top: 5px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #DADADA;
+  border-bottom: 1px solid #dadada;
 }
 
 .header-top-links>li {
@@ -408,8 +408,8 @@ textarea.input {
   line-height: 40px;
   text-align: center;
   color: #30323A;
-  background-color: #FFF;
-  border: 1px solid #DADADA;
+  background-color: #ffffff;
+  border: 1px solid #000000;
 }
 
 .header-btns .dropdown-toggle {
@@ -1858,6 +1858,7 @@ textarea.input {
 }
 
 .header-btns-text .label {
+    color: #000000;
     font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
