@@ -6,6 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\LokasiController;
+use App\Http\Controllers\HubungiController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Http;
@@ -51,7 +53,8 @@ Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
 Route::get('/produk/detail/{id}', [ProdukController::class, 'detail'])->name('produk.detail');
 Route::get('/produk/kategori/{id}', [ProdukController::class, 'produkKategori'])->name('produk.kategori');
 Route::get('/produk/all', [ProdukController::class, 'produkAll'])->name('produk.all');
-Route::get('/lokasi', [ProdukController::class, 'lokasi'])->name('lokasi');
+Route::get('/produk/lokasi', [LokasiController::class, 'index'])->name('produk.lokasi');
+Route::get('/hubungi-kami', [HubungiController::class, 'index'])->name('hubungi');
 
 // API Google
 Route::get('/auth/redirect', [CustomerController::class, 'redirect'])->name('auth.redirect');

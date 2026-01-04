@@ -1,47 +1,62 @@
-@extends(v_layouts.app) 
-
+@extends('v_layouts.app')
 @section('content')
-    <section class="py-5">
-        <div class="container">
 
-            <h2 class="mb-3">Lokasi Toko Komputer Kami</h2>
-            <p class="text-muted mb-4">
-                Silakan datang langsung ke toko kami pada jam operasional berikut.
-            </p>
+<div class="container" style="max-width:1100px">
+  <h3 class="mb-3">Lokasi Toko</h3>
 
-            <div class="row">
-                {{-- Keterangan alamat --}}
-                <div class="col-md-4 mb-4">
-                    <h5 class="mb-3">Alamat</h5>
-                    <p class="mb-1">Jl. Contoh No. 123</p>
-                    <p class="mb-1">Kecamatan Contoh, Kota Contoh</p>
-                    <p class="mb-3">Provinsi Contoh, 12345</p>
-
-                    <h6 class="mb-2">Kontak</h6>
-                    <p class="mb-1">Telp / WA: 0812-3456-7890</p>
-                    <p class="mb-3">Email: tokokomputer@example.com</p>
-
-                    <h6 class="mb-2">Jam Operasional</h6>
-                    <ul class="list-unstyled mb-0">
-                        <li>Senin – Jumat : 09.00 – 21.00</li>
-                        <li>Sabtu – Minggu : 10.00 – 20.00</li>
-                    </ul>
-                </div>
-
-                {{-- Google Maps --}}
-                <div class="col-md-8 mb-4">
-                    <div class="ratio ratio-16x9 border">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=<!-- taruh embed map kamu di sini -->"
-                            style="border:0;"
-                            allowfullscreen=""
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                    </div>
-                </div>
+  <div class="row g-3">
+    <div class="col-lg-5">
+      @foreach($lokasi as $toko)
+        @php
+          $directions = "https://www.google.com/maps/dir/?api=1&destination={$toko->lat},{$toko->lng}";
+        @endphp
+        <div class="card mb-3" style="border-radius:16px">
+          <div class="card-body">
+            <b>{{ $toko->nama }}</b>
+            <div class="text-muted" style="font-size:14px">{{ $toko->alamat }}</div>
+            <div style="font-size:14px">Jam: {{ $toko->jam ?? '-' }}</div>
+            <div style="font-size:14px">Telp/WA: {{ $toko->telp ?? '-' }}</div>
+            <div class="mt-2 d-flex gap-2">
+              <a href="{{ $directions }}" target="_blank" class="btn btn-sm btn-primary">Petunjuk Arah</a>
+              <button class="btn btn-sm btn-outline-primary"
+                onclick="focusMap({{ $toko->lat }}, {{ $toko->lng }}, @js($toko->nama), @js($toko->alamat))">
+                Lihat di Peta
+              </button>
             </div>
-
+          </div>
         </div>
-    </section>
+      @endforeach
+    </div>
+
+    <div class="col-lg-7">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+        <div id="map" style="height:520px;border-radius:16px;overflow:hidden;"></div>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+        <script>
+            const lokasi = @json($lokasi);
+
+            const first = lokasi[0] ?? { lat: -6.2, lng: 106.8 };
+            const map = L.map('map').setView([first.lat, first.lng], 12);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19
+            }).addTo(map);
+
+            lokasi.forEach(t => {
+                L.marker([t.lat, t.lng]).addTo(map)
+                    .bindPopup(`<b>${t.nama}</b><br>${t.alamat}`);
+            });
+
+            function focusMap(lat, lng, nama, alamat) {
+                map.setView([lat, lng], 16);
+                L.popup()
+                    .setLatLng([lat, lng])
+                    .setContent(`<b>${nama}</b><br>${alamat}`)
+                    .openOn(map);
+            }
+        </script>
+    </div>
+  </div>
+</div>
 @endsection
