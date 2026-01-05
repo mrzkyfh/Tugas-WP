@@ -384,7 +384,7 @@
                     <div class="footer">
                         <h3 class="footer-header">Pelayanan pelanggan</h3>
                         <ul class="list-links">
-                            <li><a href="{{ route('hubungi') }}">Tentang Kami</a></li>
+                            <li><a href="{{ route('hubungi') }}">Hubungi Kami</a></li>
                             <li><a href="#">Pengiriman & Pengembalian</a></li>
                             <li><a href="#">SPanduan Pengiriman</a></li>
                             <li><a href="#">Pertanyaan Umum</a></li>
